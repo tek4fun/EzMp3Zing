@@ -29,6 +29,8 @@ class AudioPlayerView: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var lbl_TotalTime: UILabel!
     @IBOutlet weak var lbl_CurrentTime: UILabel!
     @IBOutlet weak var btn_Play: UIButton!
+    
+    
     //var checkAddObserverAudio = false
     
     override func viewDidLoad() {
@@ -249,6 +251,9 @@ class AudioPlayerView: UIViewController, AVAudioPlayerDelegate {
     
     @IBAction func actionNext(_ sender: Any) {
         nextSong()
+    }
+    @IBAction func actionHideAudioPlayer(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "hideAudioPlayer"),object: nil)
     }
     
     func playPause() {

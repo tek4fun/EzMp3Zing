@@ -13,14 +13,26 @@ class TableViewLocal: UIViewController, UITableViewDelegate, UITableViewDataSour
     var listSongs = [Song]()
     let audioPlay = AudioPlayer.sharedInstance
     @IBOutlet weak var myTableView: UITableView!
+    @IBOutlet weak var btn_showAudio: UIButton!
+    @IBOutlet weak var view_AudioPlayer: UIView!
+    @IBOutlet weak var constraintHeight: NSLayoutConstraint!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         myTableView.delegate = self
         myTableView.dataSource = self
         
+        btn_showAudio.layer.cornerRadius = btn_showAudio.frame.height/2
+        btn_showAudio.layer.shadowOffset = CGSize.zero
+        btn_showAudio.layer.shadowColor = UIColor.black.cgColor
+        btn_showAudio.layer.shadowOpacity = 1
+        btn_showAudio.layer.shadowRadius = 1
+        btn_showAudio.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(songDidReachEndLocal), name: NSNotification.Name(rawValue: "songDidReachEndLocal"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(shufflingSongsLocal), name: NSNotification.Name(rawValue: "shufflingSongsLocal"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(prevSongLocal), name: NSNotification.Name(rawValue: "prevSongLocal"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideAudioPlayer), name: NSNotification.Name(rawValue: "hideAudioPlayer"), object: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         getData()
@@ -73,6 +85,22 @@ class TableViewLocal: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func hideAudioPlayer(){
+        
+        UIView.animate(withDuration: 0.3) {
+            self.constraintHeight.constant = 0
+            self.view.layoutIfNeeded()
+        }
+        
+    }
+    
+    @IBAction func showAudioPlayer(_ sender: UIButton){
+        UIView.animate(withDuration: 0.3) {
+            self.constraintHeight.constant = 170
+            self.view.layoutIfNeeded()
+        }
+    }
+
     //UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
