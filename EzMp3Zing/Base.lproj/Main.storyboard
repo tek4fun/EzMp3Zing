@@ -74,15 +74,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5f6-Le-F1G">
-                                <rect key="frame" x="0.0" y="448" width="375" height="170"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="170" id="pGe-vK-6RB"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="rlG-tq-Fcl" kind="embed" id="i56-aI-3Uc"/>
-                                </connections>
-                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4G-ob-XIO">
                                 <rect key="frame" x="305" y="548" width="60" height="60"/>
                                 <subviews>
@@ -104,9 +95,26 @@
                                     <constraint firstAttribute="height" constant="60" id="y6m-WT-Jxl"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5f6-Le-F1G">
+                                <rect key="frame" x="0.0" y="448" width="375" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="pGe-vK-6RB"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="rlG-tq-Fcl" kind="embed" id="i56-aI-3Uc"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K5d-xU-fTz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.16862745098039217" green="0.16078431372549021" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="1ro-ae-gys"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.16862745100000001" green="0.16078431369999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="K5d-xU-fTz" firstAttribute="leading" secondItem="vHh-ri-VUb" secondAttribute="leading" id="8PN-md-usJ"/>
                             <constraint firstItem="bGQ-8K-ztH" firstAttribute="top" secondItem="5f6-Le-F1G" secondAttribute="bottom" id="9Oy-Iy-KR9"/>
                             <constraint firstItem="pCr-Mb-3kK" firstAttribute="leading" secondItem="vHh-ri-VUb" secondAttribute="leading" id="CjG-VD-PJk"/>
                             <constraint firstItem="5f6-Le-F1G" firstAttribute="top" secondItem="pCr-Mb-3kK" secondAttribute="bottom" id="Fce-gW-Q5A"/>
@@ -115,7 +123,9 @@
                             <constraint firstAttribute="trailing" secondItem="5f6-Le-F1G" secondAttribute="trailing" id="WV0-Xy-sob"/>
                             <constraint firstItem="bGQ-8K-ztH" firstAttribute="top" secondItem="p4G-ob-XIO" secondAttribute="bottom" constant="10" id="ZCo-aj-Fi0"/>
                             <constraint firstAttribute="trailing" secondItem="pCr-Mb-3kK" secondAttribute="trailing" id="i6x-pF-4Kp"/>
+                            <constraint firstItem="K5d-xU-fTz" firstAttribute="top" secondItem="vHh-ri-VUb" secondAttribute="top" id="itx-z2-fVl"/>
                             <constraint firstItem="pCr-Mb-3kK" firstAttribute="top" secondItem="6oJ-vd-zgb" secondAttribute="bottom" id="rLh-Rh-1ex"/>
+                            <constraint firstAttribute="trailing" secondItem="K5d-xU-fTz" secondAttribute="trailing" id="sYa-ft-HA3"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="MyMusic" image="iconDownload" id="G9P-Af-w4V"/>
@@ -123,6 +133,7 @@
                         <outlet property="btn_showAudio" destination="B1R-Gu-Tg6" id="Ze3-dl-Dy0"/>
                         <outlet property="constraintHeight" destination="pGe-vK-6RB" id="TQr-1h-2KH"/>
                         <outlet property="myTableView" destination="pCr-Mb-3kK" id="TbX-Ke-sLQ"/>
+                        <outlet property="statusBar" destination="K5d-xU-fTz" id="Gnu-qa-s2w"/>
                         <outlet property="view_AudioPlayer" destination="5f6-Le-F1G" id="deW-ZF-l39"/>
                     </connections>
                 </viewController>
@@ -130,10 +141,10 @@
             </objects>
             <point key="canvasLocation" x="53.600000000000001" y="-497.00149925037488"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab BarVC-->
         <scene sceneID="1uB-eV-tId">
             <objects>
-                <tabBarController id="ay4-U6-Rfx" sceneMemberID="viewController">
+                <tabBarController id="ay4-U6-Rfx" customClass="TabBarVC" customModule="EzMp3Zing" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="9ip-2C-hiV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -176,7 +187,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JE2-j6-7EO" id="6W1-SI-MOd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sIb-wC-ndz">
@@ -374,7 +385,7 @@
                                 <color key="textColor" red="0.95745152990000004" green="1" blue="0.95922639269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G57-le-qzo">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G57-le-qzo">
                                 <rect key="frame" x="30" y="112" width="51" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Tyw-AZ-H0W"/>

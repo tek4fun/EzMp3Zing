@@ -12,15 +12,27 @@ import AVFoundation
 class TableViewLocal: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var listSongs = [Song]()
     let audioPlay = AudioPlayer.sharedInstance
+    @IBOutlet weak var statusBar: UIView!
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var btn_showAudio: UIButton!
     @IBOutlet weak var view_AudioPlayer: UIView!
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
-
+    var isUp = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         myTableView.delegate = self
         myTableView.dataSource = self
+        
+        view_AudioPlayer.layer.shadowOffset = CGSize.zero
+        view_AudioPlayer.layer.shadowColor = UIColor.black.cgColor
+        view_AudioPlayer.layer.shadowOpacity = 1
+        view_AudioPlayer.layer.shadowRadius = 2
+        
+        statusBar.layer.shadowOffset = CGSize.zero
+        statusBar.layer.shadowColor = UIColor.black.cgColor
+        statusBar.layer.shadowOpacity = 1
+        statusBar.layer.shadowRadius = 2
         
         btn_showAudio.layer.cornerRadius = btn_showAudio.frame.height/2
         btn_showAudio.layer.shadowOffset = CGSize.zero
@@ -33,6 +45,8 @@ class TableViewLocal: UIViewController, UITableViewDelegate, UITableViewDataSour
         NotificationCenter.default.addObserver(self, selector: #selector(shufflingSongsLocal), name: NSNotification.Name(rawValue: "shufflingSongsLocal"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(prevSongLocal), name: NSNotification.Name(rawValue: "prevSongLocal"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideAudioPlayer), name: NSNotification.Name(rawValue: "hideAudioPlayer"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showAudioPlayer), name: NSNotification.Name(rawValue: "showAudioPlayer"), object: nil)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         getData()
@@ -86,21 +100,27 @@ class TableViewLocal: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func hideAudioPlayer(){
-        
-        UIView.animate(withDuration: 0.3) {
-            self.constraintHeight.constant = 0
-            self.view.layoutIfNeeded()
+        if isUp {
+            isUp = false
+            UIView.animate(withDuration: 0.3) {
+                self.constraintHeight.constant = 0
+                self.view.layoutIfNeeded()
+            }
         }
         
     }
     
     @IBAction func showAudioPlayer(_ sender: UIButton){
-        UIView.animate(withDuration: 0.3) {
-            self.constraintHeight.constant = 170
-            self.view.layoutIfNeeded()
+        if !isUp {
+            isUp = true
+            UIView.animate(withDuration: 0.3) {
+                self.constraintHeight.constant = 170
+                self.view.layoutIfNeeded()
+            }
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "showAudioPlayer"),object: nil)
         }
     }
-
+    
     //UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,7 +129,7 @@ class TableViewLocal: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DetailCellVC
         cell.img_Thumbnail.image = listSongs[indexPath.row].thumbnail
-        cell.lb_Title.text = "\(listSongs[indexPath.row].title)  Ca Sy: \(listSongs[indexPath.row].artistName)"
+        cell.lb_Title.text = "\(listSongs[indexPath.row].title)"
         cell.lb_Artist.text = listSongs[indexPath.row].artistName
         return cell
     }
@@ -132,8 +152,10 @@ class TableViewLocal: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView.deselectRow(at: prevIndex, animated: true)
         
         //Select Current Cell
-        if audioPlay.index.row <= listSongs.count - 1{
+        if audioPlay.index.row < listSongs.count - 1{
             self.audioPlay.index.row += 1
+        } else {
+            self.audioPlay.index.row = 0
         }
         let index = audioPlay.index
         myTableView.selectRow(at: index, animated: true, scrollPosition: .middle)
@@ -181,6 +203,8 @@ class TableViewLocal: UIViewController, UITableViewDelegate, UITableViewDataSour
         //Prev Song
         if audioPlay.index.row > 0 {
             self.audioPlay.index.row -= 1
+        } else {
+            self.audioPlay.index.row = listSongs.count - 1
         }
         
         //Select Current Cell

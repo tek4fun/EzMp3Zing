@@ -33,6 +33,7 @@
 		1EC979FE1E516D5700E66A69 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC979FB1E516D5700E66A69 /* XPathQuery.m */; };
 		1EC97A011E516E0200E66A69 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC97A001E516E0200E66A69 /* libxml2.2.dylib */; };
 		1EC97A031E51ABD900E66A69 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC97A021E51ABD900E66A69 /* Song.swift */; };
+		9139236F1ED840300004740D /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9139236E1ED840300004740D /* TabBarVC.swift */; };
 		9170F12E1ED2F7DC00210AB6 /* DetailCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9170F12D1ED2F7DC00210AB6 /* DetailCellVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		1EC979FB1E516D5700E66A69 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		1EC97A001E516E0200E66A69 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = ../../../../usr/lib/libxml2.2.dylib; sourceTree = "<group>"; };
 		1EC97A021E51ABD900E66A69 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		9139236E1ED840300004740D /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		9170F12D1ED2F7DC00210AB6 /* DetailCellVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCellVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +170,7 @@
 				1EC979F11E516A6E00E66A69 /* TableViewOnline.swift */,
 				1EB8E7641E53071900DC1B54 /* AudioPlayerView.swift */,
 				1EB8E7621E52F49900DC1B54 /* AudioPlayer.swift */,
+				9139236E1ED840300004740D /* TabBarVC.swift */,
 				9170F12D1ED2F7DC00210AB6 /* DetailCellVC.swift */,
 			);
 			name = Controller;
@@ -281,6 +284,7 @@
 				9170F12E1ED2F7DC00210AB6 /* DetailCellVC.swift in Sources */,
 				1EB8E7651E53071900DC1B54 /* AudioPlayerView.swift in Sources */,
 				1EB8E7611E52C32300DC1B54 /* TableViewLocal.swift in Sources */,
+				9139236F1ED840300004740D /* TabBarVC.swift in Sources */,
 				1EC979FE1E516D5700E66A69 /* XPathQuery.m in Sources */,
 				1EC979FD1E516D5700E66A69 /* TFHppleElement.m in Sources */,
 			);

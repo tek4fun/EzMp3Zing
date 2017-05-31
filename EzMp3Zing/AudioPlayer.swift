@@ -11,7 +11,7 @@ import UIKit
 import AVFoundation
 
 class AudioPlayer{
-
+    
     static let sharedInstance = AudioPlayer()
     
     private init() {
@@ -33,9 +33,9 @@ class AudioPlayer{
     var thumbnail = #imageLiteral(resourceName: "music-player")
     func setupAudio()
     {
-       // var url = URL()
+        // var url = URL()
         var url: URL
-    
+        
         if let checkingUrl = URL(string: pathString)
         {
             url = checkingUrl
@@ -48,7 +48,9 @@ class AudioPlayer{
         player = AVPlayer(playerItem:playerItem)
         player.rate = 1.0;
         player.volume = 0.5
-        player.play()
+        if player.status == .readyToPlay {
+            player.play()
+        }
         playing = true
     }
     
