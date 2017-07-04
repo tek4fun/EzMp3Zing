@@ -22,12 +22,15 @@ struct Song {
         self.title = title
         self.artistName = artistName
         let thumbnailURL = baseThumbnail+thumbnail
-        let dataImage = try? Data(contentsOf: URL(string: thumbnailURL)!)
-        if thumbnail != "" {
-            self.thumbnail = UIImage(data: dataImage!)!
-        }
+        var dataImage = try? Data(contentsOf: URL(string: thumbnailURL)!)
         self.sourceOnline = source
         self.lyric = lyric
+        DispatchQueue.main.async {
+            dataImage = try? Data(contentsOf: URL(string: thumbnailURL)!)
+        }
+        if dataImage != nil {
+            self.thumbnail = UIImage(data: dataImage!)!
+        }
     }
     
     init(title: String, artistName: String, localThumbnail: String, localSource: String, lyric: String){
